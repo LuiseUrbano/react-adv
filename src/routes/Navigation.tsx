@@ -4,10 +4,9 @@ import {
   Route,
   NavLink
 } from 'react-router-dom';
-import { Routes } from './Routes';
 import { Suspense } from 'react';
 import logo from '../logo.svg';
-
+import { ShoppingPage } from '../02-component-patterns/pages/ShoppingPage';
 
 export const Navigation = () => {
   return (
@@ -17,13 +16,21 @@ export const Navigation = () => {
           <nav>
             <img src={logo} alt="React Logo" />
             <ul>
-              {Routes.map(({ to, name }) => (
-                <li key={to}>
-                  <NavLink to={to} activeClassName="nav-active" exact>
-                    {name}
-                  </NavLink>
-                </li>
-              ))}
+              <li>
+                <NavLink to="/" activeClassName="nav-active" exact>
+                  Shopping Page
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/users" activeClassName="nav-active" exact>
+                  Users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/about" activeClassName="nav-active" exact>
+                  about
+                </NavLink>
+              </li>
             </ul>
           </nav>
 
@@ -31,19 +38,14 @@ export const Navigation = () => {
             renders the first one that matches the current URL. */}
           <Switch>
 
-            {
-              Routes.map(({ to, Component }) => (
-                <Route key={to} path={to} exact>
-                  <Component />
-                </Route>
-              ))
-            }
-
             <Route path="/users">
               <h1>Users</h1>
             </Route>
+            <Route path="/about">
+              <h1>About</h1>
+            </Route>
             <Route path="/">
-              <h1>Home</h1>
+              <ShoppingPage />
             </Route>
           </Switch>
         </div>
